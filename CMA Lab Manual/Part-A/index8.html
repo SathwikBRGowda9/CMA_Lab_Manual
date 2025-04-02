@@ -1,0 +1,66 @@
+<!--8. Demonstrate canvas in HTML5.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Animation</title>
+    <style>
+        canvas {
+            border: 3px solid #250e0e;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <h1>Canvas Example</h1>
+    <br>
+    <canvas id="animationCanvas" width="600" height="400"></canvas>
+    <script>
+        // Get the canvas element
+        const canvas = document.getElementById('animationCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Ball properties
+        let x = canvas.width / 2;
+        let y = canvas.height / 2;
+        let dx = 3;
+        let dy = 3;
+        const ballRadius = 20;
+
+        // Draw the ball
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(x, y, ballRadius, 0, Math.PI * 4);
+            ctx.fillStyle = 'red';
+            
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        // Animation loop
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBall();
+            x += dx;
+            y += dy;
+
+            // Collision detection
+            if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+                dx = -dx;
+            }
+            if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+                dy = -dy;
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Start the animation
+        animate();
+    </script>
+</body>
+</html>

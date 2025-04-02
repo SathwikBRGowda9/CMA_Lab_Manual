@@ -1,0 +1,169 @@
+<!--5.Design signup form to validate username, password, and phone numbers etc. using Java 
+script--><!DOCTYPE html>
+<html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Signup Form</title>
+       <style>
+           body {
+               font-family: Arial, sans-serif;
+               background-color: hsl(237, 82%, 70%);
+               margin: 0;
+               padding: 0;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               height: 100vh;
+           }
+           .container {
+               background-color: #fff;
+               padding: 20px;
+               border-radius: 8px;
+               box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+               width: 300px;
+           }
+           h2 {
+               text-align: center;
+               color: #333;
+           }
+           label {
+               display: block;
+               margin-bottom: 5px;
+               color: #555;
+           }
+           input[type="text"], input[type="password"] {
+               width: 100%;
+               padding: 8px;
+               margin-bottom: 10px;
+               border: 1px solid #ccc;
+               border-radius: 4px;
+           }
+           input[type="submit"] {
+               width: 100%;
+               padding: 10px;
+               background-color: #28a745;
+               border: none;
+               border-radius: 4px;
+               color: white;
+               font-size: 16px;
+               cursor: pointer;
+           }
+           input[type="submit"]:hover {
+               background-color: #218838;
+           }
+           .error {
+               color: red;
+               font-size: 12px;
+               margin-bottom: 10px;
+           }
+           .success {
+               color: green;
+               font-size: 12px;
+               margin-bottom: 10px;
+           }
+       </style>
+   </head>
+   <body>
+       <div class="container">
+           <h2>Signup Form</h2>
+           <form id="signupForm" onsubmit="return validateForm()">
+               <label for="username">Username:</label>
+               <input type="text" id="username" name="username">
+               <span id="usernameError" class="error"></span>
+               
+               <label for="password">Password:</label>
+               <input type="password" id="password" name="password">
+               <span id="passwordError" class="error"></span>
+               
+               <label for="confirmPassword">Confirm Password:</label>
+               <input type="password" id="confirmPassword" name="confirmPassword">
+               <span id="confirmPasswordError" class="error"></span>
+               
+               <label for="phone">Phone Number:</label>
+               <input type="text" id="phone" name="phone">
+               <span id="phoneError" class="error"></span>
+               
+               <input type="submit" value="Sign Up">
+               <span id="successMessage" class="success"></span>
+           </form>
+       </div>
+       
+       <script>
+           function validateForm() {
+               let isValid = true;
+               
+               const username = document.getElementById('username').value.trim();
+               const usernameError = document.getElementById('usernameError');
+               const successMessage = document.getElementById('successMessage');
+               
+               if (username === '') {
+                   usernameError.textContent = 'Username is required';
+                   isValid = false;
+               } else if (username.length < 3 || username.length > 15) {
+                   usernameError.textContent = 'Username must be between 3 and 15 characters';
+                   isValid = false;
+               } else if (localStorage.getItem(username) !== null) {
+                   usernameError.textContent = 'Username already exists';
+                   isValid = false;
+               } else {
+                   usernameError.textContent = '';
+               }
+               
+               const password = document.getElementById('password').value;
+               const passwordError = document.getElementById('passwordError');
+               
+               if (password === '') {
+                   passwordError.textContent = 'Password is required';
+                   isValid = false;
+               } else if (password.length < 8 || !/[a-z]/.test(password) || !/[A-Z]/.test(password) || 
+                          !/[0-9]/.test(password) || !/[^a-zA-Z0-9]/.test(password)) {
+                   passwordError.textContent = 'Password must be at least 8 characters long and include a lowercase letter, an uppercase letter, a number, and a special character';
+                   isValid = false;
+               } else {
+                   passwordError.textContent = '';
+               }
+               
+               const confirmPassword = document.getElementById('confirmPassword').value;
+               const confirmPasswordError = document.getElementById('confirmPasswordError');
+               
+               if (confirmPassword === '') {
+                   confirmPasswordError.textContent = 'Please confirm your password';
+                   isValid = false;
+               } else if (password !== confirmPassword) {
+                   confirmPasswordError.textContent = 'Passwords do not match';
+                   isValid = false;
+               } else {
+                   confirmPasswordError.textContent = '';
+               }
+               
+               const phone = document.getElementById('phone').value;
+               const phoneError = document.getElementById('phoneError');
+               const phoneRegex = /^[0-9]{10}$/;
+               
+               if (phone === '') {
+                   phoneError.textContent = 'Phone number is required';
+                   isValid = false;
+               } else if (!phoneRegex.test(phone)) {
+                   phoneError.textContent = 'Phone number must be 10 digits';
+                   isValid = false;
+               } else {
+                   phoneError.textContent = '';
+               }
+               
+               if (isValid) {
+                   const userData = {
+                       password: password,
+                       phone: phone
+                   };
+                   localStorage.setItem(username, JSON.stringify(userData));
+                   successMessage.textContent = 'Signup successful!';
+               } else {
+                   successMessage.textContent = '';
+               }
+               
+               return isValid;
+           }
+       </script>
+   </body>
+   </html>

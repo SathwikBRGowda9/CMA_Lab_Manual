@@ -1,0 +1,136 @@
+<!--2.Develop and demonstrate a HTML document that illustrates a) Unordered List (UL) b)
+Ordered List (OL) and Definition list (DL) c) Table Alignment (Cell Spacing, Cell
+Padding, Height, Width, Border, Rowspan, colspan) d) Setting Different Table Attributes
+(Color, Image)-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Lists and Tables</title>
+<style>
+    body
+    {
+        align-items: center;
+    }
+    .main
+    {
+        color: blue;;
+    }
+table {
+width: 80%;
+border-collapse: collapse;
+margin: 20px 0;
+background-color: #f9f9f9;
+}
+th, td {
+border: 1px solid #000;
+padding: 10px;
+text-align: left;
+}
+th {
+background-color: #f2f2f2;
+}
+.colored-table {
+background-color: #ffebcd;
+}
+.image-table {
+background-image: url('path of image.jpg');
+background-size: cover;
+}
+</style>
+</head>
+<body>
+<h1 class="main">HTML Lists and Tables</h1>
+<h2>Unordered List (UL)</h2>
+<ul>
+<li>Item 1</li>
+<li>Item 2
+<ul>
+<li>Subitem 2.1</li>
+<li>Subitem 2.2</li>
+</ul>
+</li>
+<li>Item 3</li>
+</ul>
+<h2>Ordered List (OL)</h2>
+<ol>
+<li>Step 1</li>
+<li>Step 2</li>
+<li>Step 3</li>
+</ol>
+<h2>Definition List (DL)</h2>
+<dl>
+<dt>HTML</dt>
+<dd>HyperText Markup Language</dd>
+<dt>CSS</dt>
+<dd>Cascading Style Sheets</dd>
+<dt>JS</dt>
+<dd>JavaScript</dd>
+</dl>
+<h2>Table Alignment and Attributes</h2>
+<table cellspacing="5" cellpadding="10" width="80%" height="200" border="1">
+<caption>Sample Table</caption>
+<thead>
+<tr>
+<th>Header 1</th>
+<th>Header 2</th>
+<th>Header 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="2">Rowspan 2</td>
+<td>Cell 1</td>
+<td>Cell 2</td>
+</tr>
+<tr>
+<td colspan="2">Colspan 2</td>
+</tr>
+<tr>
+<td>Cell 3</td>
+<td>Cell 4</td>
+<td>Cell 5</td>
+</tr>
+</tbody>
+</table>
+<h2>Table with Different Attributes</h2>
+<h3>Table with Background Color</h3>
+<table class="colored-table">
+<tr>
+<th>Header A</th>
+<th>Header B</th>
+<th>Header C</th>
+</tr>
+<tr>
+<td>Data A1</td>
+<td>Data B1</td>
+<td>Data C1</td>
+</tr>
+<tr>
+<td>Data A2</td>
+<td>Data B2</td>
+<td>Data C2</td>
+</tr>
+</table>
+<h3>Table with Background Image</h3>
+<table class="image-table">
+<tr>
+<th>Day</th>
+<th>9:30 10:30</th>
+<th>10:30 11:30</th>
+</tr>
+<tr>
+<td>Monday</td>
+<td>English</td>
+<td>Kannada</td>
+</tr>
+<tr>
+<td>Thuesday</td>
+<td>CMA</td>
+<td>Python</td>
+</tr>
+</table>
+</body>
+</html>

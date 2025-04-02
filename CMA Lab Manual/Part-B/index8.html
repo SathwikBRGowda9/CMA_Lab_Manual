@@ -1,0 +1,84 @@
+<!--8. Write an HTML page that contains a selection box with a list of 5 countries. When the 
+user selects a country, its capital should be printed next in the list. Add CSS to 
+customize the properties of the font of the capital (color, bold and font size).-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Capitals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(173, 198, 219);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            color: #333333;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid hsl(207, 86%, 44%);
+            border-radius: 5px;
+            margin-top: 10px;
+            background-color: #e6f2ff;
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-top: 20px;
+        }
+        .capital {
+            color: hsl(277, 100%, 50%);
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        function showCapital() {
+            var country = document.getElementById("countrySelect").value;
+            var capital = "";
+            switch (country) {
+                case "USA":
+                    capital = "Washington, D.C.";
+                    break;
+                case "Canada":
+                    capital = "Ottawa";
+                    break;
+                case "UK":
+                    capital = "London";
+                    break;
+                case "France":
+                    capital = "Paris";
+                    break;
+                case "Germany":
+                    capital = "Berlin";
+                    break;
+                default:
+                    capital = "";
+            }
+            document.getElementById("capital").innerHTML = capital;
+        }
+    </script>
+</head>
+<body>
+    <h1>Select a Country</h1>
+    <select id="countrySelect" onchange="showCapital()">
+        <option value="">--Select a country--</option>
+        <option value="USA">USA</option>
+        <option value="Canada">Canada</option>
+        <option value="UK">UK</option>
+        <option value="France">France</option>
+        <option value="Germany">Germany</option>
+    </select>
+    <p>Capital: <span id="capital" class="capital"></span></p>
+</body>
+</html>

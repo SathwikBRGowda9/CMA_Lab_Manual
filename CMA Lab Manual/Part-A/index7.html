@@ -1,0 +1,82 @@
+<!--13
+7.Write a javascript that calculation the squares and cubes of the numbers from 0 to 10
+and output html text that displays the resulting values in an html table format-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squares and Cubes Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px auto;
+        }
+        table, th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        h1
+        {
+            text-align: center;
+            color: blue;
+        }
+        caption
+        {
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Squares and Cubes Table</h1>
+    <table>
+        <caption>Table of Squares and Cubes from 0 to 10</caption>
+    
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Square</th>
+                <th>Cube</th>
+            </tr>
+        </thead>
+        <tbody id="resultTableBody">
+            <!-- Table rows will be dynamically added here -->
+        </tbody>
+    </table>
+    <br>
+    <script>
+        // Function to calculate squares and cubes and populate the table
+        function calculateAndDisplay() {
+            const tableBody = document.getElementById("resultTableBody");
+            // Clear previous contents of table body
+            tableBody.innerHTML = "";
+            // Calculate squares and cubes from 0 to 10
+            for (let i = 0; i <= 10; i++) {
+                const square = i * i;
+                const cube = i * i * i;
+                // Create a new row
+                const row = document.createElement("tr");
+                // Create cells for number, square, and cube
+                const numberCell = document.createElement("td");
+                const squareCell = document.createElement("td");
+                const cubeCell = document.createElement("td");
+                // Set text content of cells
+                numberCell.textContent = i;
+                squareCell.textContent = square;
+                cubeCell.textContent = cube;
+                // Append cells to the row
+                row.appendChild(numberCell);
+                row.appendChild(squareCell);
+                row.appendChild(cubeCell);
+                // Append row to the table body
+                tableBody.appendChild(row);
+            }
+        }
+        // Call the function to calculate and display squares and cubes when the page loads
+        window.onload = calculateAndDisplay;
+    </script>
+</body>
+</html>

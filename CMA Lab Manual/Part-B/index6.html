@@ -1,0 +1,147 @@
+<!--6.Write a JavaScript to design a simple calculator to perform the following operations: 
+sum, product,difference and quotient--><!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Simple Calculator</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: hsl(0, 9%, 38%);
+                margin: 0;
+            }
+            .calculator {
+                border: 1px solid #ccc;
+                padding: 20px;
+                border-radius: 10px;
+                background-color: hsl(0, 24%, 12%);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: 320px;
+                text-align: center;
+            }
+            .calculator input {
+                width: calc(100% - 20px);
+                padding: 10px;
+                margin: 10px 0;
+                font-size: 16px;
+                text-align: right;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            .calculator button {
+                width: 60px;
+                height: 60px;
+                margin: 5px;
+                font-size: 18px;
+                cursor: pointer;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+            }
+            .calculator button:hover {
+                background-color: #0056b3;
+            }
+            .calculator .operator {
+                background-color: #28a745;
+            }
+            .calculator .operator:hover {
+                background-color: #218838;
+            }
+            .calculator .equal {
+                background-color: #ffc107;
+            }
+            .calculator .equal:hover {
+                background-color: #e0a800;
+            }
+            .calculator .clear {
+                background-color: #dc3545;
+            }
+            .calculator .clear:hover {
+                background-color: #c82333;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="calculator">
+            <input type="text" id="display" disabled>
+            <br>
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('9')">9</button>
+            <button class="operator" onclick="setOperation('/')">/</button>
+            <br>
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button class="operator" onclick="setOperation('*')">*</button>
+            <br>
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button class="operator" onclick="setOperation('-')">-</button>
+            <br>
+            <button onclick="appendNumber('0')">0</button>
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button class="equal" onclick="calculateResult()">=</button>
+            <button class="operator" onclick="setOperation('+')">+</button>
+        </div>
+        <script>
+            let display = document.getElementById('display');
+            let currentOperation = null;
+            let firstOperand = null;
+            let shouldResetDisplay = false;
+    
+            function appendNumber(number) {
+                if (shouldResetDisplay) {
+                    display.value = number;
+                    shouldResetDisplay = false;
+                } else {
+                    display.value += number;
+                }
+            }
+    
+            function setOperation(operation) {
+                if (firstOperand === null) {
+                    firstOperand = parseFloat(display.value);
+                } else if (currentOperation) {
+                    firstOperand = calculate(firstOperand, parseFloat(display.value), currentOperation);
+                    display.value = firstOperand;
+                }
+                currentOperation = operation;
+                shouldResetDisplay = true;
+            }
+    
+            function calculateResult() {
+                if (currentOperation && firstOperand !== null) {
+                    display.value = calculate(firstOperand, parseFloat(display.value), currentOperation);
+                    firstOperand = null;
+                    currentOperation = null;
+                    shouldResetDisplay = true;
+                }
+            }
+    
+            function clearDisplay() {
+                display.value = '';
+                firstOperand = null;
+                currentOperation = null;
+            }
+    
+            function calculate(a, b, operation) {
+                switch (operation) {
+                    case '+': return a + b;
+                    case '-': return a - b;
+                    case '*': return a * b;
+                    case '/': return b !== 0 ? a / b : 'Error';
+                    default: return b;
+                }
+            }
+        </script>
+    </body>
+    </html>
+    

@@ -1,0 +1,66 @@
+<!--7.Develop and demonstrate a HTML5 file that includes JavaScript script that uses 
+functions for the following problems: a. Parameter: A string b. Output: The position in 
+the string of the left-most vowel c. Parameter: A number d. Output: The number with its 
+digits in the reverse order-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Functions</title>
+    <script>
+        // Function to find the position of the left-most vowel in a string
+        function findLeftMostVowel(str) {
+            const vowels = 'aeiouAEIOU';
+            for (let i = 0; i < str.length; i++) {
+                if (vowels.indexOf(str[i]) !== -1) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        // Function to reverse the digits of a number
+        function reverseNumber(num) {
+            return parseFloat(num.toString().split('').reverse().join('')) * Math.sign(num);
+        }
+
+        // Function to display the position of the left-most vowel
+        function displayLeftMostVowel() {
+            const str = document.getElementById('inputString').value;
+            const position = findLeftMostVowel(str);
+            document.getElementById('vowelPositionOutput').value = position;
+        }
+
+        // Function to display the reversed number
+        function displayReversedNumber() {
+            const num = document.getElementById('inputNumber').value;
+            const reversedNum = reverseNumber(num);
+            document.getElementById('reversedNumberOutput').value = reversedNum;
+        }
+    </script>
+</head>
+<body>
+    <h1>JavaScript Functions</h1>
+    
+    <div>
+        <h2>Find the Position of the Left-most Vowel</h2>
+        <label for="inputString">Enter a string:</label>
+        <input type="text" id="inputString">
+        <button onclick="displayLeftMostVowel()">Find Vowel Position</button>
+        <br>
+        <label for="vowelPositionOutput">Position of left-most vowel:</label>
+        <input type="text" id="vowelPositionOutput" readonly>
+    </div>
+    
+    <div>
+        <h2>Reverse the Digits of a Number</h2>
+        <label for="inputNumber">Enter a number:</label>
+        <input type="number" id="inputNumber">
+        <button onclick="displayReversedNumber()">Reverse Number</button>
+        <br>
+        <label for="reversedNumberOutput">Reversed number:</label>
+        <input type="text" id="reversedNumberOutput" readonly>
+    </div>
+</body>
+</html>
